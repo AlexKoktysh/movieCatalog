@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <header>
-            <main-header />
+            <main-layout-header />
         </header>
         <main>
             <slot></slot>
@@ -10,23 +10,17 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from "vue";
-const MainHeader = defineAsyncComponent(
-    () => import("../../../features/main/ui/Header.vue"),
-);
+import { MainLayoutHeader } from "@/features";
 </script>
 
 <style scoped lang="scss">
-@import "../../../shared/styles/index.scss";
+@import "@/shared/styles";
 
 .container {
     height: 100%;
     header {
         background: $header-bg;
         padding: 1rem;
-        div {
-            @include font-styles($black-color, 18px, 800);
-        }
     }
 
     main {

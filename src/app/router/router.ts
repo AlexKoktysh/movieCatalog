@@ -1,5 +1,7 @@
-import { envConfig, pathes } from "@/shared";
 import { createRouter, createWebHistory } from "vue-router";
+
+import { MoviesPage } from "@/pages";
+import { envConfig, pathes } from "@/shared";
 
 const routes = [
     {
@@ -9,7 +11,7 @@ const routes = [
     {
         path: pathes.MOVIES,
         name: "movies",
-        component: () => import("@/pages/movies/ui/Page.vue"),
+        component: MoviesPage,
     },
 ];
 

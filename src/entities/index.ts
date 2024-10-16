@@ -3,5 +3,13 @@ export {
     type IMovieType,
     type IQueryType,
     type IMovieState,
+    MovieCard,
+    CardWrapper,
+    CardSkeleton,
 } from "./movies";
-export { configModule, type IConfigState } from "./config";
+export {
+    configModule,
+    type IConfigState,
+    ConfigSiteName,
+    ConfigUserInfo,
+} from "./config";

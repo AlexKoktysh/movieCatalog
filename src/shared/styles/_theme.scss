@@ -1,9 +1,6 @@
 @import "normalize.css";
-
-html,
-body {
-    height: 100vh;
-}
+@import "./variables";
+@import "./mixins";
 
 body {
     margin: 0;
@@ -16,4 +13,56 @@ body {
     .icon {
         font-size: 25px;
     }
+}
+
+.skeleton {
+    width: 100%;
+    background-color: $skeleton-background;
+    border-radius: 4px;
+    animation: shimmer 1.5s infinite;
+    background: linear-gradient(
+        90deg,
+        $skeleton-background 25%,
+        #f0f0f0 50%,
+        $skeleton-background 75%
+    );
+    background-size: 400px 100%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+.btn {
+    padding: 10px;
+    min-width: 40px;
+    height: 40px;
+    border: 1px solid $gray-border;
+    transition:
+        transform 0.1s ease-in-out,
+        background-color 0.3s ease;
+    cursor: pointer;
+    &__primary {
+        @include font-styles($black-color, 16px, 600);
+        &__active {
+            background: $primary-color;
+            color: $white-color;
+            text-decoration: underline;
+            transform: scale(0.95);
+        }
+    }
+    &__primary:hover:not(:disabled) {
+        background-color: $primary-hover-color;
+        color: $white-color;
+        border-color: $white-color;
+    }
+}
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }

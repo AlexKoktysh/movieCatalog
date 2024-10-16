@@ -1,3 +1,9 @@
 export { moviesModule } from "./module";
 
-export type { IMovieType, IQueryType, IMovieState } from "./types";
+export type {
+    IMovieType,
+    IQueryType,
+    IMovieState,
+    IResponseGetMovies,
+    IPagination,
+} from "./types";

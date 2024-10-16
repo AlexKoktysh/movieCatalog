@@ -1,5 +1,7 @@
 <template>
-    <div>MoviesPage</div>
+    <movies />
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Movies } from "@/widgets";
+</script>

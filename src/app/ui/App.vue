@@ -5,9 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from "vue";
-
-const MainLayout = defineAsyncComponent(
-    () => import("../../widgets/layouts/ui/MainLayout.vue"),
-);
+import { MainLayout } from "@/widgets";
 </script>

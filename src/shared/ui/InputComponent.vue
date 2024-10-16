@@ -1,14 +1,20 @@
 <template>
     <fieldset
-        :class="[styles.fieldset, isFocused || search ? styles.focused : '']"
+        :class="[
+            customClassNames.fieldset,
+            isFocused || value ? customClassNames.focused : '',
+        ]"
     >
         <legend
-            :class="[styles.legend, isFocused && search ? styles.focused : '']"
+            :class="[
+                customClassNames.legend,
+                isFocused && value ? customClassNames.focused : '',
+            ]"
         >
             {{ placeholder }}
         </legend>
         <input
-            :value="search"
+            :value="value"
             @input="updateValue($event)"
             @focus="isFocused = true"
             @blur="isFocused = false"
@@ -19,11 +25,11 @@
 <script setup lang="ts">
 import { ref, defineProps, defineEmits } from "vue";
 
-interface Props {
+interface IProps {
     placeholder: string;
-    search: string;
+    value: string;
 }
-const { placeholder, search } = defineProps<Props>();
+const { placeholder, value } = defineProps<IProps>();
 const emit = defineEmits(["update:value"]);
 
 const updateValue = (event: Event) => {
@@ -31,7 +37,7 @@ const updateValue = (event: Event) => {
     emit("update:value", target.value);
 };
 
-const styles = {
+const customClassNames = {
     fieldset: "fieldset",
     focused: "focused",
     legend: "legend",
@@ -41,14 +47,13 @@ const isFocused = ref(false);
 </script>
 
 <style scoped lang="scss">
-@import "./../styles/index.scss";
+@import "@/shared/styles";
 
 .fieldset {
     border: none;
     padding: 0;
     margin: 0;
     position: relative;
-    width: 100%;
 }
 .legend {
     position: absolute;
@@ -57,28 +62,31 @@ const isFocused = ref(false);
     transform: translateY(-50%);
     transition: all 0.2s;
     pointer-events: none;
-    @include font-styles($black-color, 14px, 600);
+    @include font-styles($gray-text, 14px, 600);
     font-style: italic;
     background: $white-color;
-    z-index: 100;
     border-radius: 5px;
     width: auto;
     padding: 0 5px;
 }
 .focused .legend {
     top: 2px;
-    font-size: 12px;
-    z-index: 100;
+    @include font-styles($gray-text, 12px, 600);
+}
+
+input {
+    border: 1px solid $gray-border;
+    border-radius: 8px;
+    width: 100%;
+}
+input:active,
+input:focus {
+    border: 1px solid $primary-color;
 }
 
 input,
 input:active {
-    border: 1px solid $gray-border;
     outline: none;
-}
-
-input::placeholder {
-    @include font-styles($black-color, 14px, 600);
-    font-style: italic;
+    padding: 10px;
 }
 </style>

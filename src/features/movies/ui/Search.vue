@@ -1,30 +1,23 @@
 <template>
-    <input-component
-        :search="search"
-        placeholder="Search movies"
+    <custom-input
+        :value="search"
         @update:value="updateSearchValue"
+        placeholder="Search movies"
     />
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, ref, defineProps, defineEmits } from "vue";
-const InputComponent = defineAsyncComponent(
-    () => import("../../../shared/ui/InputComponent.vue"),
-);
+import { computed } from "vue";
+import { useStore } from "vuex";
 
-interface Props {
-    search: string;
-}
-defineProps<Props>();
-const emit = defineEmits(["update:value"]);
+import { CustomInput, debounce, type RootState } from "@/shared";
+import type { IQueryType } from "@/entities";
 
-const updateSearchValue = (value: string) => {
-    emit("update:value", value);
-};
+const store = useStore<RootState>();
+const search = computed(() => store.state["movies"]["pagination"]["s"]);
 
-const search = ref("");
+const updateSearchValue = debounce((value: string) => {
+    const params: IQueryType = { s: value, page: 1 };
+    store.dispatch("movies/fetchMovies", params);
+}, 300);
 </script>
-
-<style scoped lang="scss">
-@import "../../../shared/styles/index.scss";
-</style>

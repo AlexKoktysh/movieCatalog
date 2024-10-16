@@ -9,3 +9,27 @@
     justify-content: $justify-content;
     align-items: $align-items;
 }
+
+@mixin card-borders {
+    box-shadow:
+        0px 12px 24px -4px #919eab1f,
+        0px 0px 2px 0px #919eab33;
+    border-radius: 16px;
+}
+@mixin card-paddings {
+    padding: 24px;
+    @media (max-width: 960px) {
+        padding: 16px;
+    }
+}
+
+@mixin card-hovered {
+    cursor: pointer;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+}
+@mixin hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

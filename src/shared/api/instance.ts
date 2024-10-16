@@ -12,13 +12,11 @@ export class BaseRepository {
     constructor() {
         this.instance.interceptors.response.use(
             (response) => {
-                debugger;
-                return response;
+                return response.data;
             },
             (error) => {
-                debugger;
                 console.log("error", error);
-                return error;
+                return Promise.reject(error);
             },
         );
     }
