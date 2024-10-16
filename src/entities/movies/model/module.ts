@@ -38,7 +38,6 @@ export const moviesModule = {
         },
         setPagination(state: IMovieState, pagination: Partial<IPagination>) {
             state.pagination = { ...state.pagination, ...pagination };
-            console.log(state.pagination.total);
         },
         setErrorMessage(state: IMovieState, message: string) {
             state.errorMessage = message;

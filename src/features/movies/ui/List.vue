@@ -1,8 +1,5 @@
 <template>
-    <div
-        class="movies-list"
-        :class="{ 'empty-search': !movies.length && !isLoading }"
-    >
+    <div class="movies-list">
         <template v-if="!isLoading">
             <div
                 v-for="movie in movies"
@@ -19,8 +16,9 @@
         </template>
     </div>
     <custom-pagination
+        v-if="pagination.total > 10"
         :currentPage="pagination.page"
-        :totalPages="pagination.total"
+        :totalPages="Math.ceil(pagination.total / pagination.limit)"
         :limit="pagination.limit"
         @update:currentPage="updatePage"
     />
@@ -39,16 +37,16 @@ const movies = computed(() => store.state["movies"]["movies"]);
 const isLoading = computed(() => store.state["movies"]["isLoadingMovie"]);
 const pagination = computed(() => store.state["movies"]["pagination"]);
 
+const fetchMovies = (params: IQueryType) => {
+    store.dispatch("movies/fetchMovies", params);
+};
+
 const updatePage = (newPage: number) => {
     const params: IQueryType = {
         s: pagination.value.s,
         page: newPage,
     };
     fetchMovies(params);
-};
-
-const fetchMovies = (params: IQueryType) => {
-    store.dispatch("movies/fetchMovies", params);
 };
 
 onMounted(() => {
@@ -77,14 +75,6 @@ onMounted(() => {
         height: 310px;
         box-sizing: border-box;
     }
-}
-
-.empty-search {
-    background-image: url("/public//emptySearch.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 400px;
 }
 
 .card-hover:hover {

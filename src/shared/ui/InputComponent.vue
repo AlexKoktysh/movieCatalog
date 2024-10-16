@@ -77,7 +77,7 @@ const isFocused = ref(false);
 input {
     border: 1px solid $gray-border;
     border-radius: 8px;
-    width: 100%;
+    width: calc(100% - 20px);
 }
 input:active,
 input:focus {

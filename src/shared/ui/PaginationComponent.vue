@@ -102,6 +102,7 @@ const goToPage = (page: number | string) => {
 .pagination {
     @include flex(center, center);
     gap: 10px;
+    flex-wrap: wrap;
     .not_click {
         cursor: not-allowed;
     }
